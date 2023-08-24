@@ -15,13 +15,13 @@ const books = [
     {
         id: 1,
         name: "Karthik",
-        books: ["12345Book"],
+        books: ["12345Book", "MyBook"],
 
     },
     {
         id: 1,
         name: "Poojs",
-        books: ["12345Book"],
+        books: ["12345Book", "HersBook"],
         
     }
  ];

@@ -15,3 +15,7 @@
 // for authors => to get 1. all authors, 2.specific authors, 3. list of authors based on books
 
 // for publications => to get 1. all publications, 2. specific publications, 3. list of publications based on book
+
+// POST REQUESTS
+
+// Add new 1. books, 2. authors and 3. publications
