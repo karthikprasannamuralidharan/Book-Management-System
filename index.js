@@ -1,13 +1,19 @@
 const express = require("express");
+const mongoose = require("mongoose");
 
 var bodyParser = require("body-parser");
 
 const database = require("./database");
 
-//Initialize
+//Initialize express
 const booky = express();
 booky.use(bodyParser.urlencoded({extended: true}));
 booky.use(bodyParser.json());
+
+//Establish Database connection
+mongoose.connect(
+    "mongodb+srv://Karthik:31103110@shapeai.dej3spb.mongodb.net/Booky?retryWrites=true&w=majority",
+).then(() => console.log("Connection Established"));
 
 /*
 route           -   /books
