@@ -1,9 +1,14 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 
 var bodyParser = require("body-parser");
-
-const database = require("./database");
+//Database.js
+const database = require("./database/database");
+const BookModel = require("./database/book");
+const AuthorModel = require("./database/author");
+const PublicationModel = require("./database/publication");
 
 //Initialize express
 const booky = express();
@@ -12,7 +17,7 @@ booky.use(bodyParser.json());
 
 //Establish Database connection
 mongoose.connect(
-    "mongodb+srv://Karthik:31103110@shapeai.dej3spb.mongodb.net/Booky?retryWrites=true&w=majority",
+    process.env.MONGO_URL
 ).then(() => console.log("Connection Established"));
 
 /*
@@ -22,8 +27,9 @@ access          -   public
 parameters       -   none
 methods         -   get
 */
-booky.get("/books", (req,res) => {
-    return res.json({books: database.books});
+booky.get("/books", async (req,res) => {
+    const getAllBooks = await BookModel.find();
+    return res.json(getAllBooks);
 });
 
 /*
@@ -33,12 +39,15 @@ access          -   public
 parameters       -   isbn
 methods         -   get
 */
-booky.get("/books/:isbn", (req,res) => {
-    const getSpecificBook = database.books.filter(
-        (book) => book.ISBN === req.params.isbn
-    );
+booky.get("/books/:isbn", async (req,res) => {
 
-    if(getSpecificBook.length === 0){
+    const getSpecificBook = await BookModel.findOne({ISBN: req.params.isbn});
+
+    // const getSpecificBook = database.books.filter(
+    //     (book) => book.ISBN === req.params.isbn
+    // );
+
+    if(!getSpecificBook){
         return res.json({
             error: `Specified Book with ISBN ${req.params.isbn} not found`
         });
