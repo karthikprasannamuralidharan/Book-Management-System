@@ -19,3 +19,8 @@
 // POST REQUESTS
 
 // Add new 1. books, 2. authors and 3. publications
+
+// PUT REQUEST FOR UPDATING
+
+// 1. Book 2. Publication
+// One book can only be published by just 1 publication  => So assume we made a mistake that book with isbn 12345Book was written by publication object with id 1 but was actually written by id 2 so now we update it 
